@@ -17,6 +17,8 @@ functions:
   viewerRequest:
     handler: src/edge/viewerRequest.handler
     description: Viewer request event (when the CloudFront first receives the request from the client)
+    memorySize: 128
+    timeout: 5
   originRequest:
     handler: src/edge/originRequest.handler
     description: Origin request event (before the request to the origin service)
@@ -26,3 +28,5 @@ functions:
   viewerResponse:
     handler: src/edge/viewerResponse.handler
     description: Viewer response event (before the response is returned to the client)
+    memorySize: 128
+    timeout: 5

@@ -4,8 +4,7 @@ const puppeteer = require("puppeteer-core");
 exports.handler = async (event, context, callback) => {
 	const ERROR_MESSAGE = "No query parameter given!";
 	const HEADERS = {
-		"Access-Control-Allow-Origin":
-			process.env.ALLOW_ORIGIN || '*',
+		"Access-Control-Allow-Origin": process.env.ALLOW_ORIGIN || "*",
 		"Access-Control-Request-Method": "POST",
 	};
 	const WAIT_AFTER_FIRST_NETWORK_IDLE = 2000;
@@ -31,14 +30,14 @@ exports.handler = async (event, context, callback) => {
 
 		return new Promise(async (resolve, reject) => {
 			let page = await BROWSER.newPage();
-			await page.goto(TARGET_URL, { waitUntil: 'networkidle0' });
+			await page.goto(TARGET_URL, { waitUntil: "networkidle0" });
 			await new Promise((resolve) => {
 				setTimeout(resolve, WAIT_AFTER_FIRST_NETWORK_IDLE);
 			});
 			const RESULT = await page.content();
 			resolve(RESULT);
 		}).then((RESULT) => {
-			console.log("result", RESULT);
+			console.log("result", RESULT, TARGET_URL, JSON.stringify(HEADERS));
 			BROWSER.close();
 
 			// Success
